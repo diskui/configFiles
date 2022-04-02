@@ -1,0 +1,8 @@
+
+#!/bin/zsh
+
+external_monitor=$(xrandr --query | grep 'DP1')
+
+if [[ $external_monitor = *connected* ]]; then
+xrandr --output eDP1 --mode 1920x1080 --rotate normal --output DP1 --mode 1920x1080 --rotate normal  --left-of eDP1
+fi

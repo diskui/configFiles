@@ -1,0 +1,80 @@
+#! /bin/sh
+
+#打开sxhkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+#设置光标样式
+xsetroot -cursor_name left_ptr &
+
+#打开picom
+# picom --experimental-backends --backend glx -b &
+picom -b &
+
+#关闭触摸板
+~/scripts/touchpad_shutdown.sh &
+
+#设置多显示器
+~/.config/bspwm/init.sh &
+
+#设置工作区
+
+
+#dual monitor
+# bspc monitor DP1 -d  I II III IV V
+# bspc monitor eDP1 -d  VI VII VIII IX X
+
+#primary monitor
+bspc monitor eDP1 -d  I II III IV V VI VII VIII IX X
+
+#hdmi monitor
+# bspc monitor DP1 -d  I II III IV V VI VII VIII IX X
+
+
+#设置边框与窗口边距
+bspc config border_width         2
+bspc config window_gap           10
+
+
+
+#设置内边距
+bspc config top_padding 5
+bspc config bottom_padding 10
+bspc config right_padding 10
+bspc config left_padding 10
+
+
+#设置不随鼠标focus
+bspc config focus_follows_pointer false
+
+
+#边框颜色
+bspc config normal_border_color \#666666
+
+#bspc config focused_border_color \#CE55F6
+bspc config focused_border_color \#ffffff
+
+#预选框颜色
+#bspc config presel_feedback_color \#A8B6EA
+bspc config presel_feedback_color \#182d41
+
+
+#分隔比例
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+#some rules
+bspc rule -a Zathura state=tiled
+bspc rule -a weixin state=floating
+bspc rule -a qq state=floating
+bspc rule -a Qq state=floating
+bspc rule -a telegram-desktop state=floating
+bspc rule -a TelegramDesktop state=floating
+bspc rule -a wemeetapp state=floating
+
+//打开输入法
+fcitx5 -d &
+
+
+#自动换壁纸
+~/.config/bspwm/autoChangeWP.sh &
